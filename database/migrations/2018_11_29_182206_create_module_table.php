@@ -15,7 +15,7 @@ class CreateModuleTable extends Migration
     {
         Schema::create('module', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('method_id')->unsigned()->index();
+            $table->integer('method_id')->nullable(true)->unsigned()->index();
             $table->foreign('method_id')->references('id')->on('method')->onDelete('restrict');
             $table->integer('module_id')->nullable(true)->unsigned()->index();
             $table->foreign('module_id')->references('id')->on('module')->onDelete('restrict');
