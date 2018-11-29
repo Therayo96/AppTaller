@@ -19,9 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::group(['prefix' => 'general','middleware' => ['auth']], function (){
+    \App\Clases\Configuration::routes('general', 1);
+});
 
-
-//Aquí se le pasa el prefijo y si está activa la ruta, esto se puede hacer de otra manera para no estar agregando el grupo manualmente
-
-
-//Solo con esas dos cosas, las rutas ya se estan creando desde base de datos, ya para generar el menú de la derecha, esdesde appserviceprovider
