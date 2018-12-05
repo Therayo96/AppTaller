@@ -19,7 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::group(['prefix' => 'general','middleware' => ['auth']], function (){
-    \App\Clases\Configuration::routes('general', 1);
+Route::group(['prefix' => 'system','middleware' => ['auth']], function (){
+    \App\Clases\Configuration::routes('system', 1);
 });
 

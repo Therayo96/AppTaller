@@ -4,6 +4,7 @@ namespace App\Providers;
 
 
 use App\Models\General\Module;
+use App\Models\General\Controller as ModelController;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Support\ServiceProvider;
 use JeroenNoten\LaravelAdminLte\Events\BuildingMenu;
@@ -35,7 +36,7 @@ class AppServiceProvider extends ServiceProvider
                                 dd('Te hace falta una ruta para poder continuar, agregala en el archivo de rutas con el prefijo = '.$controladorFaltante->prefix);
                         }catch(\Exception $exception){
                             dd($exception->getMessage());
-                        }     
+                        }      
                         
                         
                         $submenu[] = [

@@ -116,8 +116,9 @@
             <section class="content">
 
                 @yield('content')
-
+                @include('layouts._modal')
             </section>
+
             <!-- /.content -->
             @if(config('adminlte.layout') == 'top-nav')
             </div>

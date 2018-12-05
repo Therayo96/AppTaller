@@ -2,6 +2,7 @@
 
 namespace App\Clases;
 use App\Models\General\Controller;
+use Illuminate\Support\Facades\Route;
     
 class Configuration
 {
