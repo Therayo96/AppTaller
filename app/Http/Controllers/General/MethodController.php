@@ -55,7 +55,7 @@ class MethodController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'controller_id'=>'required',
+            'controller_id'=>'required|integer',
             'name' => 'required|string|unique:method,name',
             'verbName'=>'required|string',
             'name_function'=>'required|string',

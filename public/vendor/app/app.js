@@ -20,6 +20,9 @@ $('body').on('click', '.modal-show', function (event) {
             $('#select2').select2({
                 width: '100%'
             });
+            $('#select3').select2({
+                width: '100%'
+            });
         }
     });
 
