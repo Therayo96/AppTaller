@@ -10,10 +10,10 @@ class Method extends Model
     
     protected $fillable = [
         'controller_id',
+        'name',
         'verbName',
         'name_function',
-        'url',
-        'name'
+        'url'
     ];
     
     protected $guarded = [];

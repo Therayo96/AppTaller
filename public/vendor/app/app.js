@@ -14,7 +14,10 @@ $('body').on('click', '.modal-show', function (event) {
         dataType: 'html',
         success: function (response) {
             $('#modal-body').html(response);
-            $('#status').select2({
+            $('#select').select2({
+                width: '100%'
+            });
+            $('#select2').select2({
                 width: '100%'
             });
         }

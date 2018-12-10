@@ -21,7 +21,7 @@
     <div class="form-group">
         {!! Form::label('status','Status') !!}
         {!! Form::select('status', ['1' => 'Visible', '0' => 'Not visible'], '1',
-                ['class'=>'form-control', 'id'=>'status']); !!}
+                ['class'=>'form-control', 'id'=>'select']); !!}
     </div>
 
 {!! Form::close() !!}

@@ -31,7 +31,7 @@ class SystemController extends Controller
         $this->validate($request, [
             'name' => 'required|string|unique:controller,name',
             'containerName' => 'required|string',
-            'prefix' => 'required|string|unique:controller,prefix'
+            'prefix' => 'required|string'
         ]);
 
         $model = ModelController::create($request->all());
@@ -51,7 +51,7 @@ class SystemController extends Controller
         $this->validate($request, [
             'name' => 'required|string|unique:controller,name',
             'containerName' => 'required|string',
-            'prefix' => 'required|string|unique:controller,prefix'
+            'prefix' => 'required|string'
         ]);
 
         $model = ModelController::findOrFail($id);
