@@ -12,7 +12,7 @@ try {
     window.$ = window.jQuery = require('jquery');
     require('bootstrap');
 
-
+    import swal from 'sweetalert2';
     window.swal = require('sweetalert2');
 } catch (e) {}
 

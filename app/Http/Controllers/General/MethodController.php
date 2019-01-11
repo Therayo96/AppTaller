@@ -88,7 +88,7 @@ class MethodController extends Controller
                             ->where('status', 1)
                             ->get()
                             ->pluck('name', 'id');
-                            $verbos = ['post' =>'POST','get' => 'GET','put' => 'PUT','patch' => 'PATCH','delete' => 'DELETE','resource' => 'RESOURCE'];                    
+        $verbos = ['post' =>'POST','get' => 'GET','put' => 'PUT','patch' => 'PATCH','delete' => 'DELETE','resource' => 'RESOURCE'];                    
         $model = Method::findOrFail($id);
         return view('System.Method.formMethod', compact('model','controller','verbos'));
     }
@@ -104,7 +104,7 @@ class MethodController extends Controller
     {
         $this->validate($request, [
             'controller_id'=>'required',
-            'name' => 'required|string|unique:method,name',
+            'name' => 'required|string',
             'verbName'=>'required|string',
             'name_function'=>'required|string',
             'url'=>'required|string'

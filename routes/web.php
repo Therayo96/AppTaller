@@ -23,3 +23,10 @@ Route::group(['prefix' => 'system','middleware' => ['auth']], function (){
     \App\Clases\Configuration::routes('system', 1);
 });
 
+Route::group(['prefix' => 'werehouse','middleware' => ['auth']], function (){
+    \App\Clases\Configuration::routes('werehouse', 1);
+});
+
+Route::group(['prefix' => 'sale','middleware' => ['auth']], function (){
+    \App\Clases\Configuration::routes('sale', 1);
+});

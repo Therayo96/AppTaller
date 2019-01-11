@@ -23,6 +23,22 @@ $('body').on('click', '.modal-show', function (event) {
             $('#select3').select2({
                 width: '100%'
             });
+            $('#code')
+            .keyup(function() {
+                var value = $( this ).val();
+                if(value == null || value == 0){
+                    $('.barcode-container').hide();
+                }else{
+                    JsBarcode("#barcode", value, {
+                        width: 2,
+                        height: 50,
+                        displayValue: true,
+                        fontSize: 10
+                    });
+                    $('.barcode-container').show();
+                }
+            })
+            .keyup();
         }
     });
 
@@ -111,3 +127,65 @@ $('body').on('click', '.btn-delete', function (event) {
         }
     });
 });
+
+$('body').on('click', '.btn-active', function (event) {
+    event.preventDefault();
+
+    var me = $(this),
+        url = me.attr('href'),
+        title = me.attr('title'),
+        id = me.attr('data');
+
+    swal({
+        title: 'Are you sure want to ' + title + ' ?',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes!'
+    }).then((result) => {
+        if (result.value) {
+            $.ajax({
+                url: url,
+                type: "PUT",
+                data : id,
+                success: function (response) {
+                    $('#datatable').DataTable().ajax.reload();
+                    swal({
+                        type: 'success',
+                        title: 'Success!',
+                        text: 'Data has been '+ title +'!'
+                    });
+                },
+                error: function (xhr) {
+                    swal({
+                        type: 'error',
+                        title: 'Oops...',
+                        text: 'Something went wrong!'
+                    });
+                }
+            });
+        }
+    });
+});
+function print(){
+    var value = $('#code').val();
+    if(value==null || value==0){
+        const toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+          });
+          
+          toast({
+            type: 'error',
+            title: 'Code Empty',
+            text: 'Write a Code!'
+          })
+    }else{
+        $('.barcode-container').printArea();
+    }
+    
+}
+
