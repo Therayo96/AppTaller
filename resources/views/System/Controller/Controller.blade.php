@@ -48,7 +48,7 @@
             columns: [
                 {data: 'DT_RowIndex', name: 'id'},
                 {data: 'name', name: 'name'},
-                {data: 'containerName', name: 'container'},
+                {data: 'containerName', name: 'containerName'},
                 {data: 'prefix', name: 'prefix'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
