@@ -9,6 +9,12 @@ use DataTables;
 
 class CustomersController extends Controller
 {
+    
+    
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +32,13 @@ class CustomersController extends Controller
      */
     public function create()
     {
-        //
+        try{
+            $model = new Customer();
+            $type = ['CC' =>'cédula de ciudadanía','TI' => 'tarjeta de identidad','CI' => 'cédula de identidad'];
+            return view('Sales.Customer.formCustomers', compact('model','type'));
+        }catch(QueryException $queryException){
+            return abort(500, $queryException->getMessage());
+        }
     }
 
     /**
@@ -37,19 +49,14 @@ class CustomersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'num_document' => 'string|unique:customers,num_document'
+        ]);
+        $model = Customer::create($request->all());
+        return $model;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+    
 
     /**
      * Show the form for editing the specified resource.
@@ -59,7 +66,9 @@ class CustomersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $type = ['CC' =>'cédula de ciudadanía','TI' => 'tarjeta de identidad','CI' => 'cédula de identidad'];
+        $model = Customer::findOrFail($id);
+        return view('Sales.Customer.formCustomers', compact('model','type'));
     }
 
     /**
@@ -71,7 +80,8 @@ class CustomersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $model = Customer::findOrFail($id);
+        $model->update($request->all());
     }
 
     /**
@@ -82,7 +92,8 @@ class CustomersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $model = Customer::findOrFail($id);
+        $model->delete();
     }
 
     public function ApiCustomer(){
@@ -91,8 +102,8 @@ class CustomersController extends Controller
         ->addColumn('action', function ($model) {
             return view('layouts._action', [
                 'model' => $model,
-                'url_edit' => route('controller.edit', $model->id),
-                'url_destroy' => route('controller.destroy', $model->id)
+                'url_edit' => route('customer.edit', $model->id),
+                'url_destroy' => route('customer.destroy', $model->id)
             ]);
         })    
         ->addIndexColumn()
