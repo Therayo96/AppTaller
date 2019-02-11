@@ -4,17 +4,11 @@ namespace App\Http\Controllers\Purchases;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Purchases\Provider;
-Use DataTables;
+use App\Models\Purchases\Income;
+use DataTables;
 
-class ProvidersController extends Controller
+class IncomeController extends Controller
 {
-    
-    
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -22,7 +16,7 @@ class ProvidersController extends Controller
      */
     public function index()
     {
-        return view('Purchases.Provider.Provider');
+        return view('Purchases.Income.income');
     }
 
     /**
@@ -32,13 +26,7 @@ class ProvidersController extends Controller
      */
     public function create()
     {
-        try{
-            $model = new Provider();
-            $type = ['NIT' =>'Nit','RUT' => 'Rut'];
-            return view('Purchases.Provider.FormProvider', compact('model','type'));
-        }catch(QueryException $queryException){
-            return abort(500, $queryException->getMessage());
-        }
+        //
     }
 
     /**
@@ -49,11 +37,7 @@ class ProvidersController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'num_document' => 'string|unique:provider,num_document'
-        ]);
-        $model = Provider::create($request->all());
-        return $model;
+        //
     }
 
     /**
@@ -75,9 +59,7 @@ class ProvidersController extends Controller
      */
     public function edit($id)
     {
-            $type = ['NIT' =>'Nit','RUT' => 'Rut'];
-            $model = Provider::findOrFail($id);
-            return view('Purchases.Provider.FormProvider', compact('model','type'));
+        //
     }
 
     /**
@@ -89,8 +71,7 @@ class ProvidersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $model = Provider::findOrFail($id);
-        $model->update($request->all());
+        //
     }
 
     /**
@@ -101,22 +82,14 @@ class ProvidersController extends Controller
      */
     public function destroy($id)
     {
-        $model = Provider::findOrFail($id);
-        $model->delete();
+        //
     }
 
-    public function ApiProvider(){
-        $model = Provider::query();
+
+    public function ApiIncome(){
+        $model = Income::query();
         return DataTables::of($model)
-        ->addColumn('action', function ($model) {
-            return view('layouts._action', [
-                'model' => $model,
-                'url_edit' => route('providers.edit', $model->id),
-                'url_destroy' => route('providers.destroy', $model->id)
-            ]);
-        })    
         ->addIndexColumn()
-        ->rawColumns(['action'])
         ->make(true);
     }
 }

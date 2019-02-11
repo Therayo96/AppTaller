@@ -1,5 +1,5 @@
 {!! Form::model($model, [
-    'route' => $model->exists ? ['providers.update', $model->id] : 'providers.store',
+    'route' => $model->exists ? ['supplier.update', $model->id] : 'supplier.store',
     'method' => $model->exists ? 'PUT' : 'POST'
 ]) !!}
     {{csrf_field()}}  

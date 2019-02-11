@@ -1,16 +1,16 @@
 @extends('adminlte::page')
 
-@section('title', 'Providers')
+@section('title', 'Income')
 
 @section('content_header')
-    <h1>Providers <small>provider administrator</small></h1>
+    <h1>Income <small>Income administrator</small></h1>
 @stop
 
 @section('content')
 <div class="panel panel-primary">
     <div class="panel-heading">
-      <h3 class="panel-title">List Providers
-          <a href="{{ route('providers.create') }}" class="btn btn-success pull-right modal-show" style="margin-top: -8px;" title="Create Provider"><i class="fas fa-plus"></i> Create</a>
+      <h3 class="panel-title">List Income
+          <a href="#" class="btn btn-success pull-right modal-show" style="margin-top: -8px;" title="Create Income"><i class="fas fa-plus"></i> Create</a>
       </h3>
     </div>
     <div class="panel-body">
@@ -18,9 +18,10 @@
               <thead>
                   <tr>
                       <th>No</th>
-                      <th>Company</th>
-                      <th>Contact</th>
-                      <th>Telephone</th>
+                      <th>User</th>
+                      <th>Nº Voucher</th>
+                      <th>Total</th>
+                      <th>State</th>
                       <th>Action</th>
                   </tr>
               </thead>
@@ -39,16 +40,17 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
          });
-         $('#datatable').DataTable({
+        $('#datatable').DataTable({
             responsive: true,
             processing: true,
             serverSide: true,
-            ajax: "{{ route('api.providers') }}",
+            ajax: "{{ route('api.income') }}",
             columns: [
                 {data: 'DT_RowIndex', name: 'id'},
-                {data: 'name', name: 'name'},
-                {data: 'contact', name: 'contact'},
-                {data: 'num_contact', name: 'num_contact'},
+                {data: 'iduser', name: 'iduser'},
+                {data: 'num_voucher', name: 'num_voucher'},
+                {data: 'total', name: 'total'},
+                {data: 'state', name: 'state'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
