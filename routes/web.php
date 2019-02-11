@@ -24,6 +24,19 @@ Route::group(['prefix' => 'system','middleware' => ['auth']], function (){
     
 });
 
+Route::group(['prefix' => 'system','middleware' => ['auth']], function (){
+    \App\Clases\Configuration::routes('system', 1);
+});
+Route::group(['prefix' => 'werehouse','middleware' => ['auth']], function (){
+    \App\Clases\Configuration::routes('werehouse', 1);
+});
+Route::group(['prefix' => 'sales','middleware' => ['auth']], function (){
+    \App\Clases\Configuration::routes('sales', 1);
+});
+Route::group(['prefix' => 'purchases','middleware' => ['auth']], function (){
+    \App\Clases\Configuration::routes('purchases', 1);
+});
+
 Route::group(['prefix' => 'Admin','middleware' => ['auth']], function (){
     \App\Clases\Configuration::routes('Admin', 1);
 });

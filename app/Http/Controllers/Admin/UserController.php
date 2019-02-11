@@ -77,7 +77,6 @@ class UserController extends Controller
                 'name' => 'required|string',
                 'email'=>'required|string',
                 'password'=>'required|string'
-
             ]);
             $model = User::findOrFail($id);
             $model->update($request->all());

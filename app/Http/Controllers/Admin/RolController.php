@@ -1,16 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\Roles;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Roles;
 use DataTables;
 use RealRashid\SweetAlert\Facades\Alert;
 USE Caffeinated\Shinobi\Models\Role;
+
 class RolController extends Controller
 {
-   
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         return view('Admin.Roles.roles');
@@ -23,7 +27,6 @@ class RolController extends Controller
      */
     public function create()
     {
-        
         $model = new Role();
         return view('Admin.Roles.formRoles', compact('model'));
     }
@@ -71,8 +74,6 @@ class RolController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
-        
         $this->validate($request, [
               
             'name' => 'required|string',
@@ -84,7 +85,6 @@ class RolController extends Controller
         ]);
         $model = Role::findOrFail($id);
         $model->update($request->all());
-    
     }
 
     /**
@@ -112,6 +112,5 @@ class RolController extends Controller
         ->addIndexColumn()
         ->rawColumns(['action'])
        ->make(true);
-}
-
+    }
 }
