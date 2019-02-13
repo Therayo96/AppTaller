@@ -24,8 +24,8 @@ Route::group(['prefix' => 'system','middleware' => ['auth']], function (){
     
 });
 
-Route::group(['prefix' => 'system','middleware' => ['auth']], function (){
-    \App\Clases\Configuration::routes('system', 1);
+Route::group(['prefix' => 'admin','middleware' => ['auth']], function (){
+    \App\Clases\Configuration::routes('admin', 1);
 });
 Route::group(['prefix' => 'werehouse','middleware' => ['auth']], function (){
     \App\Clases\Configuration::routes('werehouse', 1);
@@ -35,18 +35,6 @@ Route::group(['prefix' => 'sales','middleware' => ['auth']], function (){
 });
 Route::group(['prefix' => 'purchases','middleware' => ['auth']], function (){
     \App\Clases\Configuration::routes('purchases', 1);
-});
-
-Route::group(['prefix' => 'admin','middleware' => ['auth']], function (){
-    \App\Clases\Configuration::routes('admin', 1);
-});
-
-Route::group(['prefix' => 'Roles','middleware' => ['auth']], function (){
-    \App\Clases\Configuration::routes('roles', 1);
-});
-
-Route::group(['prefix' => 'Permisos','middleware' => ['auth']], function (){
-    \App\Clases\Configuration::routes('permisos', 1);
 });
 
 
