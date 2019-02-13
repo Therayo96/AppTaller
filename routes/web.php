@@ -37,8 +37,8 @@ Route::group(['prefix' => 'purchases','middleware' => ['auth']], function (){
     \App\Clases\Configuration::routes('purchases', 1);
 });
 
-Route::group(['prefix' => 'Admin','middleware' => ['auth']], function (){
-    \App\Clases\Configuration::routes('Admin', 1);
+Route::group(['prefix' => 'admin','middleware' => ['auth']], function (){
+    \App\Clases\Configuration::routes('admin', 1);
 });
 
 Route::group(['prefix' => 'Roles','middleware' => ['auth']], function (){
