@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Purchases;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Purchases\Income;
+use App\Models\Purchases\Supplier;
 use DataTables;
 
 class IncomeController extends Controller
@@ -26,7 +27,14 @@ class IncomeController extends Controller
      */
     public function create()
     {
-        //
+        try{
+            $model = new Income();
+            $supplier = Supplier::pluck('name','id');
+            $type = ['1'=>'Ticket','2'=>'Receipt','3'=>'Invoicing'];
+            return view('Purchases.Income.FormIncome', compact('model','supplier','type'));
+        }catch(QueryException $queryException){
+            return abort(500, $queryException->getMessage());
+        }
     }
 
     /**
@@ -48,7 +56,8 @@ class IncomeController extends Controller
      */
     public function show($id)
     {
-        //
+        $model = Income::with('users','supplier')->find($id);
+        return view('Purchases.Income.Show', compact('model'));
     }
 
     /**
@@ -89,7 +98,24 @@ class IncomeController extends Controller
     public function ApiIncome(){
         $model = Income::query();
         return DataTables::of($model)
+        ->addColumn('action', function ($model) {
+            return view('layouts._actionShow', [
+                'model' => $model,
+                'url_show' => route('income.show', $model->id), 
+                'url_edit' => route('income.edit', $model->id),
+                'url_destroy' => route('income.destroy', $model->id)
+            ]);
+        })
+        ->editColumn('user', function ($model){
+            return '<span class="label label-info">'. $model->users->name .'</span>';
+        })
+        ->editColumn('state',function ($model){
+            return ($model->state == 'registered') ? 
+                                        '<span class="label label-success">'.$model->state.'</span>':
+                                        '<span class="label label-danger">'.$model->state.'</span>';
+        })
         ->addIndexColumn()
+        ->rawColumns(['action','user','state'])
         ->make(true);
     }
 }

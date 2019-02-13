@@ -10,7 +10,8 @@
 <div class="panel panel-primary">
     <div class="panel-heading">
       <h3 class="panel-title">List Income
-          <a href="#" class="btn btn-success pull-right modal-show" style="margin-top: -8px;" title="Create Income"><i class="fas fa-plus"></i> Create</a>
+          <a href="{{ route('income.create') }}" class="btn btn-success pull-right btn-show create  " 
+             style="margin-top: -8px;" title="Create Income"><i class="fas fa-plus"></i> Create</a>
       </h3>
     </div>
     <div class="panel-body">
@@ -47,7 +48,7 @@
             ajax: "{{ route('api.income') }}",
             columns: [
                 {data: 'DT_RowIndex', name: 'id'},
-                {data: 'iduser', name: 'iduser'},
+                {data: 'user', name: 'iduser'},
                 {data: 'num_voucher', name: 'num_voucher'},
                 {data: 'total', name: 'total'},
                 {data: 'state', name: 'state'},

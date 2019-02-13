@@ -21,4 +21,12 @@ class income extends Model
     ];
     
     protected $guarded = [];
+
+    public function users(){
+        return $this->belongsTo('App\User','iduser');
+    }
+
+    public function supplier(){
+        return $this->belongsTo('App\Models\Purchases\Supplier','idsupplier');
+    }
 }
