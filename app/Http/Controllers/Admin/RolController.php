@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
 use DataTables;
 use RealRashid\SweetAlert\Facades\Alert;
-USE Caffeinated\Shinobi\Models\Role;
+use Caffeinated\Shinobi\Models\Role;
+
 class RolController extends Controller
 {
     /**
@@ -83,7 +83,7 @@ class RolController extends Controller
      */
     public function update(Request $request, $id)
     {
-         
+
         $this->validate($request, [
               
             'name' => 'required|string',

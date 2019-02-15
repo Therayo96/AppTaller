@@ -10,12 +10,12 @@
 
     <div class="form-group">
         {!! Form::label('email','Email') !!}
-        {!! Form::text('email', null, ['class' => 'form-control', 'id' => 'email']) !!}
+        {!! Form::email('email', null, ['class' => 'form-control', 'id' => 'email']) !!}
     </div>
 
     <div class="form-group">
         {!! Form::label('password','Password') !!}
-        {!! Form::text('password', null, ['class' => 'form-control', 'id' => 'password']) !!}
+        {!! Form::password('password', ['class' => 'form-control', 'id' => 'password']) !!}
     </div>
 
     
