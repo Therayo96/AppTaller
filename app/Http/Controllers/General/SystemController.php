@@ -49,7 +49,7 @@ class SystemController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => 'required|string|unique:controller,name',
+            'name' => 'required|string',
             'containerName' => 'required|string',
             'prefix' => 'required|string'
         ]);

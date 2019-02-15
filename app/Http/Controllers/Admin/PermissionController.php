@@ -29,7 +29,7 @@ class PermissionController extends Controller
     public function create()
     {
         $model = new Permission();
-        return view('Admin.Users.FormUsers', compact('model'));
+        return view('Admin.Permisos.formPermisos', compact('model'));
     }
 
     /**
@@ -40,7 +40,15 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            
+
+            'name' => 'required|string',
+            'slug'=>'required|string',
+            'description'=>'required|string',
+            ]);
+            $model = Permission::create($request->all());
+            return $model;
     }
 
     /**
@@ -79,8 +87,8 @@ class PermissionController extends Controller
         $this->validate($request, [
               
             'name' => 'required|string',
-            'email'=>'required|string',
-            'password'=>'required|string'
+            'slug'=>'required|string',
+            'description'=>'required|string'
 
         ]);
         $model = Permission::findOrFail($id);

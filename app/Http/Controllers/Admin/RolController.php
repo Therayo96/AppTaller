@@ -1,16 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\Roles;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Roles;
+
 use DataTables;
 use RealRashid\SweetAlert\Facades\Alert;
 USE Caffeinated\Shinobi\Models\Role;
 class RolController extends Controller
 {
-   
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         return view('Admin.Roles.roles');
@@ -23,7 +27,6 @@ class RolController extends Controller
      */
     public function create()
     {
-        
         $model = new Role();
         return view('Admin.Roles.formRoles', compact('model'));
     }
@@ -36,7 +39,16 @@ class RolController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $this->validate($request, [
+            
+            'name' => 'required|string|unique:method,name',
+            'slug'=>'required|string',
+            'description'=>'required|string',  
+        ]);
+        $model = Role::create($request->all());
+        return $model;
+       
     }
 
     /**
@@ -58,8 +70,8 @@ class RolController extends Controller
      */
     public function edit($id)
     {
-        $model = Roles::findOrFail($id);
-        return view('Admin.Roles.formRoles', compact('model'));
+        $model = Role::findOrFail($id);
+       return view('Admin.Roles.formRoles', compact('model'));
     }
 
     /**
@@ -71,20 +83,16 @@ class RolController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
-        
+         
         $this->validate($request, [
               
             'name' => 'required|string',
-            'email'=>'required|string',
             'slug'=>'required|string',
             'description'=>'required|string'
-        
 
         ]);
         $model = Role::findOrFail($id);
         $model->update($request->all());
-    
     }
 
     /**
@@ -95,10 +103,10 @@ class RolController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
     }
 
-    public function apiRoles(){
+    public function ApiRoles(){
 
         $model = Role::query();
         return DataTables::of($model)
@@ -112,6 +120,5 @@ class RolController extends Controller
         ->addIndexColumn()
         ->rawColumns(['action'])
        ->make(true);
-}
-
+    }
 }
