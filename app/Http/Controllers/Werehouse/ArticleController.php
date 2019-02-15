@@ -27,6 +27,20 @@ class ArticleController extends Controller
     }
 
     /**
+     * Display a searching resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function search($filter)
+    {
+        $model = Article::where('code','=', $filter)
+                    ->select('id','name')->orderBy('name','asc')->take(1)->get();
+        
+        return ['article' => $model];
+        
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -146,4 +160,6 @@ class ArticleController extends Controller
         ->rawColumns(['category','action','condition'])
         ->make(true);
     }
+
+
 }

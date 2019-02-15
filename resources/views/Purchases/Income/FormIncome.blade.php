@@ -55,41 +55,45 @@
             
             <div class="col-md-6">
                 <div class="form-group">
-                    {!! Form::label('idarticles','Articles') !!}
+                    {!! Form::label('code','Articles') !!}
                     <div class="input-group">
-                    {!! Form::text('idarticles', null, ['class' => 'form-control', 
-                                            'id' => 'idarticles','placeholder'=>'Enter Articles']) !!}
+                    {!! Form::text('code', null, ['class' => 'form-control', 
+                                            'id' => 'code-article','placeholder'=>'Enter code articles']) !!}
                         <span class="input-group-btn">
                             <button type="button" class="btn btn-info btn-flat"><i class="fas fa-spinner"></i></button>
                         </span>
-                    </div>   
+                        {!! Form::text('articles', null, ['class' => 'form-control', 
+                        'id' => 'article-name', 'readonly']) !!}  
+                    </div>
+                    
                 </div>
             </div>
 
             <div class="col-md-2">
                 <div class="form-group">
-                    {!! Form::label('num_voucher','Price') !!}
-                    {!! Form::text('num_voucher', null,
+                    {!! Form::label('price','Price') !!}
+                    {!! Form::text('price', null,
                     ['class' => 'form-control',
                     'placeholder' => '$',
-                    'id' => 'num_voucher']) !!}
+                    'id' => 'price']) !!}
 
                 </div>
             </div>
 
             <div class="col-md-2">
                 <div class="form-group">
-                    {!! Form::label('num_voucher','Quantity') !!}
-                    {!! Form::text('num_voucher', null,
+                    {!! Form::label('quantity','Quantity') !!}
+                    {!! Form::text('quantity', null,
                     ['class' => 'form-control',
                     'placeholder' => '0',
-                    'id' => 'num_voucher']) !!}
+                    'id' => 'quantity']) !!}
 
                 </div>
             </div>
 
             <div class="col-md-2">
-                {!! Form::button('<i class="fa fa-plus"></i>', ['type' => 'button', 'class' => 'btn btn-block btn-success' , 'style'=>'margin-top: 2.4rem;'] )!!}
+                {!! Form::button('<i class="fa fa-plus"></i>', ['type' => 'button', 'class' => 'btn btn-block btn-success' , 'style'=>'margin-top: 2.4rem;',
+                                                                'id'=>'add'] )!!}
             </div>
             
             <div class="col-md-12">

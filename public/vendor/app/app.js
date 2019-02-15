@@ -199,7 +199,7 @@ $('body').on('click', '.btn-show', function (event) {
     $('#modal-title').text(title);
     $('#modal-btn-save').addClass('hide');
     me.hasClass('create') ? 
-        $('#modal-btn-save').removeClass('hide') : $('#modal-btn-save').addClass('hide');
+        $('#modal-btn-save').removeClass('hide').text('Save') : $('#modal-btn-save').addClass('hide');
 
     $.ajax({
         url: url,
@@ -212,3 +212,33 @@ $('body').on('click', '.btn-show', function (event) {
     $('#modal').modal('show');
 });
 
+$('body').on('keypress', '#code-article', function (event) {
+    var keycode = (event.keyCode ? event.keyCode : event.which);
+	if(keycode == '13'){
+        var value = $(this).val();
+        var article = $("#article-name");
+        
+        $.ajax({
+            type : 'get',
+            url  : 'http://localhost/werehouse/articles/' + value + '/search',
+            dataType: "JSON",
+        success: function(data) {
+            if(data.article.length > 0){
+                article.val(data.article[0].name);
+            }else{
+                article.val("No records found")
+            }
+        },
+        error : function() {
+            swal({
+                      type: 'error',
+                      title: 'Oops...',
+                      text: 'Nothing Data'
+            })
+        }
+        });
+      
+      
+	}
+	event.stopPropagation();
+});
