@@ -99,7 +99,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <div class="table-responsive">
-                        <table class="table table-striped table-bordered table-sm">
+                        <table class="table table-striped table-bordered table-sm" id="mytable">
                             <thead>
                                 <tr>
                                     <th>Options</th>
@@ -110,9 +110,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                </tr>
-                                <tr style="background-color: #CEECF5;">
+                            <tr style="background-color: #CEECF5;">
                                     <td colspan="4" align="right"> 
                                         <strong>Subtotal:</strong>
                                     </td>
@@ -126,7 +124,7 @@
                                         <td colspan="4" align="right">
                                             <strong>Total:</strong>
                                         </td>   
-                                    </tr>
+                                </tr>
                             </tbody>
                          </table>
                     </div>

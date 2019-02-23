@@ -55,9 +55,5 @@
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
-
-        function (){
-            
-        }
 </script>
 @stop

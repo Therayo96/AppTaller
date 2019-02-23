@@ -4,16 +4,17 @@ $('body').on('click', '.modal-show', function (event) {
     var me = $(this),
         url = me.attr('href'),
         title = me.attr('title');
-
+    
     $('#modal-title').text(title);
     $('.modal-dialog').removeClass('modal-lg');
     $('#modal-btn-save').removeClass('hide')
     .text(me.hasClass('edit') ? 'Update' : 'Create');
-
+    
     $.ajax({
         url: url,
         dataType: 'html',
         success: function (response) {
+            
             $('#modal-body').html(response);
             $('#select').select2({
                 width: '100%'
@@ -242,3 +243,6 @@ $('body').on('keypress', '#code-article', function (event) {
 	}
 	event.stopPropagation();
 });
+
+// function for table income create
+
