@@ -40,6 +40,15 @@ class ArticleController extends Controller
         
     }
 
+    public function searchAll($filter){
+        
+        $model = Article::where('code','=', $filter)
+                ->orWhere('name','like','%'.$filter.'%')->get();
+
+        return ['article' => $model];
+    }
+
+
     /**
      * Show the form for creating a new resource.
      *

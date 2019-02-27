@@ -117,6 +117,7 @@
 
                 @yield('content')
                 @include('layouts._modal')
+                @include('layouts._modalTable')
             </section>
 
             <!-- /.content -->

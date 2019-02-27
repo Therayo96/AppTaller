@@ -60,7 +60,7 @@
                     {!! Form::text('code', null, ['class' => 'form-control', 
                                             'id' => 'code-article','placeholder'=>'Enter code articles']) !!}
                         <span class="input-group-btn">
-                            <button type="button" class="btn btn-info btn-flat"><i class="fas fa-spinner"></i></button>
+                            <button type="button" class="btn btn-info btn-flat" id="btn-modal-second"><i class="fas fa-spinner"></i></button>
                         </span>
                         {!! Form::text('articles', null, ['class' => 'form-control', 
                         'id' => 'article-name', 'readonly']) !!}  
@@ -109,8 +109,10 @@
                                     <th>Subtotal</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                            <tr style="background-color: #CEECF5;">
+                            <tbody>                                
+                            </tbody>
+                            <tfoot>
+                                <tr style="background-color: #CEECF5;">
                                     <td colspan="4" align="right"> 
                                         <strong>Subtotal:</strong>
                                     </td>
@@ -125,7 +127,7 @@
                                             <strong>Total:</strong>
                                         </td>   
                                 </tr>
-                            </tbody>
+                            </tfoot>
                          </table>
                     </div>
                 </div>

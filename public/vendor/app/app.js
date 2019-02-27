@@ -207,6 +207,8 @@ $('body').on('click', '.btn-show', function (event) {
         dataType: 'html',
         success: function (response) {
             $('#modal-body').html(response);
+            $('#mytable').hide();
+            $('#article-name').hide();
         }
     });
 
@@ -225,7 +227,8 @@ $('body').on('keypress', '#code-article', function (event) {
             dataType: "JSON",
         success: function(data) {
             if(data.article.length > 0){
-                article.val(data.article[0].name);
+                article.val(data.article[0].name);  
+                $('#article-name').show();
             }else{
                 article.val("No records found")
             }
@@ -245,4 +248,126 @@ $('body').on('keypress', '#code-article', function (event) {
 });
 
 // function for table income create
+$(document).on('click', '#add', function(){
+    articleName = $('#article-name').val();
+    price = $('#price').val();
+    quantity = $('#quantity').val();
+    tax = $('#tax').val();
+    subtotal = 0;
+    total = 0;
+    validator = 0;
 
+    if(quantity.trim().length === 0){
+        swal({
+            type: 'error',
+            title: 'Oops...',
+            text: 'La cantidad del articulo '+articleName+' no debe etar vacía'
+        }); validator++;
+    }
+
+    if(price.trim().length === 0){
+        swal({
+            type: 'error',
+            title: 'Oops...',
+            text: 'Pro favor verica la casilla de precio del articulo '+articleName
+        }); 
+        validator++;
+    }
+        
+    if(articleName.trim().length === 0){
+        
+        swal({
+            type: 'error',
+            title: 'Oops...',
+            text: 'Ingresa un articulo' 
+        }); 
+        validator++;
+    }    
+
+    if(validator === 0){
+        quantity = parseInt(quantity);
+        price = parseFloat(price);
+
+        if(isNaN(price)){
+            swal({
+                type: 'error',
+                title: 'Oops...',
+                text: 'El precio del articulo '+articleName+' debe ser valida'
+            }); 
+            validator++;
+        }
+
+        if(isNaN(quantity)){
+            swal({
+                type: 'error',
+                title: 'Oops...',
+                text: 'La cantidad del articulo '+articleName+' debe ser valida'
+            }); 
+            validator++;            
+        }
+
+        if(validator === 0){
+            $('#mytable').show();
+            $('#mytable > tbody').append('<tr><td><button class="btn btn-danger btn-sm" id="delete-row"><i class="fas fa-times-circle"></i></button></td><td>'+articleName+
+                                            '</td><td>'+price+'</td><td>'+quantity+'</td><td>'+(quantity*price)+'</td></tr>');            
+
+            $('#mytable > tbody > tr').each(function(idx, obj){
+                subtotal +=parseFloat($(obj).find('td').eq(4).text());
+            });
+              
+
+            rowSubtotal = $('#mytable > tfoot > tr:first');
+            
+            (rowSubtotal.find('td').length === 1) ? rowSubtotal.append('<td>'+subtotal+'</td>'): rowSubtotal.find('td').eq(1).text(subtotal);
+            
+            rowTax = $('#mytable >tfoot > tr:nth-child(2)');
+
+            (rowTax.find('td').length === 1) ? rowTax.append('<td>'+tax+'</td>'): rowTax.find('td').eq(1).text(tax);
+
+            total += (subtotal * tax ) + subtotal ;
+
+            rowTotal  = $('#mytable >tfoot > tr:nth-child(3)');
+
+            (rowTotal.find('td').length === 1) ? rowTotal.append('<td>'+total+'</td>'): rowTotal.find('td').eq(1).text(total);
+        }
+    }
+    
+    
+});
+
+
+$(document).on('click','#delete-row',function(){
+
+    subT = 0;
+    rowT  = 0;
+    subRow  = parseFloat($(this).closest('tr').remove().find('td').eq(4).text());
+    subRowT = parseFloat(rowSubtotal.find('td').eq(1).text());
+    
+    subT = subRowT - subRow;
+    (rowSubtotal.find('td').length === 1) ? rowSubtotal.append('<td>'+subT+'</td>'): rowSubtotal.find('td').eq(1).text(subT);
+    
+    rowT += ((subT*tax)+subT);
+    
+    (rowTotal.find('td').length === 1) ? rowTotal.append('<td>'+rowT+'</td>'): rowTotal.find('td').eq(1).text(rowT);
+    if(subT === 0 ){
+        $('#mytable').hide();
+    }
+    
+    $(this).closest('tr').remove();
+     return false;
+});
+
+
+
+// modal para buscar articles
+$(document).on('click','#btn-modal-second',function(){
+    $('#ModalAgregarNombre').modal('show');
+    $('#table-modal').hide();
+});
+
+
+//boton buscar article from income
+
+$(document).on('click','#btn-search',function(){
+    $('#table-modal').show();
+});

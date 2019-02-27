@@ -10,7 +10,7 @@
 <div class="panel panel-primary">
     <div class="panel-heading">
       <h3 class="panel-title">List Income
-          <a href="{{ route('income.create') }}" class="btn btn-success pull-right btn-show create  " 
+          <a href="{{ route('income.create') }}" class="btn btn-success pull-right btn-show create" 
              style="margin-top: -8px;" title="Create Income"><i class="fas fa-plus"></i> Create</a>
       </h3>
     </div>
