@@ -215,7 +215,36 @@ $('body').on('click', '.btn-show', function (event) {
     $('#modal').modal('show');
 });
 
-$('body').on('keypress', '#code-article', function (event) {
+$('body').on('keydown.autocomplete', '#code-article', function(e){
+    $("#code-article").autocomplete({
+        source: function( request, response ) {
+           
+            $.ajax({
+            type: 'GET',
+            url: "/werehouse/articles/search",
+            data: {
+                term : request.term
+            },
+            dataType: "JSON",
+            success: function(data) {
+                    
+                response(data);
+            }
+            });
+        },
+        minLength: 1,
+        select: function (event, ui) {
+         // Set selection
+         $("#code-article").val(ui.item.label); // display the selected text
+         //$('').val(ui.item.value); // save selected id to input
+         return false;
+        }
+       });
+})
+
+
+    
+/*$('body').on('keypress', '#code-article', function (event) {
     var keycode = (event.keyCode ? event.keyCode : event.which);
 	if(keycode == '13'){
         var value = $(this).val();
@@ -223,7 +252,10 @@ $('body').on('keypress', '#code-article', function (event) {
         
         $.ajax({
             type : 'get',
-            url  : 'http://localhost/werehouse/articles/' + value + '/search',
+            url  : '{!! route("articles.search") !!}',
+            data: {
+                term : request.term
+            },
             dataType: "JSON",
         success: function(data) {
             if(data.article.length > 0){
@@ -245,7 +277,7 @@ $('body').on('keypress', '#code-article', function (event) {
       
 	}
 	event.stopPropagation();
-});
+});*/
 
 // function for table income create
 $(document).on('click', '#add', function(){
@@ -355,19 +387,4 @@ $(document).on('click','#delete-row',function(){
     
     $(this).closest('tr').remove();
      return false;
-});
-
-
-
-// modal para buscar articles
-$(document).on('click','#btn-modal-second',function(){
-    $('#ModalAgregarNombre').modal('show');
-    $('#table-modal').hide();
-});
-
-
-//boton buscar article from income
-
-$(document).on('click','#btn-search',function(){
-    $('#table-modal').show();
 });

@@ -1,4 +1,4 @@
-<div class="modal fade" id="modal" role="dialog" aria-labelledby="myModalLabel" style="overflow-y: scroll;">
+<div class="modal fade" id="modal" role="dialog" aria-labelledby="myModalLabel" >
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header  bg-primary" id="modal-header">

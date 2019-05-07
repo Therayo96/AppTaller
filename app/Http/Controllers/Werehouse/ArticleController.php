@@ -31,21 +31,22 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function search($filter)
-    {
-        $model = Article::where('code','=', $filter)
-                    ->select('id','name')->orderBy('name','asc')->take(1)->get();
+   public function search(Request $request){
         
-        return ['article' => $model];
-        
-    }
+        $search = $request->get('term');
 
-    public function searchAll($filter){
-        
-        $model = Article::where('code','=', $filter)
-                ->orWhere('name','like','%'.$filter.'%')->get();
+        $lista = [];
+    
+        $results = Article::where('code','=', $search)
+                ->orWhere('name','lIKE','%'.$search.'%')
+                ->select('id','name')
+                ->orderBy('name','asc')->get();
 
-        return ['article' => $model];
+        foreach($results as $result){
+            $lista[] = ['id' => $result->id,'value' => $result->name];
+        }        
+
+        return response()->json($lista);
     }
 
 

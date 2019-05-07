@@ -18,6 +18,7 @@ class IncomeController extends Controller
     public function index()
     {
         return view('Purchases.Income.income');
+        
     }
 
     /**

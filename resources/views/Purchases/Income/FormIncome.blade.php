@@ -58,9 +58,9 @@
                     {!! Form::label('code','Articles') !!}
                     <div class="input-group">
                     {!! Form::text('code', null, ['class' => 'form-control', 
-                                            'id' => 'code-article','placeholder'=>'Enter code articles']) !!}
+                                            'id' => 'code-article','placeholder'=>'Enter articles']) !!}
                         <span class="input-group-btn">
-                            <button type="button" class="btn btn-info btn-flat" id="btn-modal-second"><i class="fas fa-spinner"></i></button>
+                            <button type="button" class="btn btn-info btn-flat"><i class="fas fa-spinner"></i></button>
                         </span>
                         {!! Form::text('articles', null, ['class' => 'form-control', 
                         'id' => 'article-name', 'readonly']) !!}  
